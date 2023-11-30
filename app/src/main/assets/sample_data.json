@@ -59,51 +59,5 @@
                   "required":false,
                   "is_active":true,
                   "icon":"https://jemala.png" }
-      ],
-      [
-            {
-                  "field_id":123,
-                  "hint":"Test1",
-                  "field_type":"chooser",
-                  "required":false,
-                  "is_active":true,
-                  "icon":"https://jemala.png" },
-            {
-                  "field_id":131,
-                  "hint":"Test2",
-                  "field_type":"chooser",
-                  "required":false,
-                  "is_active":true,
-                  "icon":"https://jemala.png" },
-            {
-                  "field_id":654,
-                  "hint":"Test3",
-                  "field_type":"chooser",
-                  "required":false,
-                  "is_active":true,
-                  "icon":"https://jemala.png" }
-      ],
-      [
-            {
-                  "field_id":12,
-                  "hint":"Test1",
-                  "field_type":"chooser",
-                  "required":false,
-                  "is_active":true,
-                  "icon":"https://jemala.png" },
-            {
-                  "field_id":13,
-                  "hint":"Test2",
-                  "field_type":"chooser",
-                  "required":false,
-                  "is_active":true,
-                  "icon":"https://jemala.png" },
-            {
-                  "field_id":65,
-                  "hint":"Test3",
-                  "field_type":"chooser",
-                  "required":false,
-                  "is_active":true,
-                  "icon":"https://jemala.png" }
       ]
 ]

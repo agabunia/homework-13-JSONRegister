@@ -2,19 +2,37 @@ package com.example.homework_13_jsonregister.registerFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.homework_13_jsonregister.databinding.FieldLayoutBinding
 import com.example.homework_13_jsonregister.databinding.NestedLayoutBinding
 import com.example.homework_13_jsonregister.extentions.ParentData
 
-class ParentRecyclerView: RecyclerView.Adapter<ParentRecyclerView.ParentViewHolder>() {
-    private var parentList: List<ParentData> = mutableListOf()
+class ParentRecyclerView :
+    ListAdapter<ParentData, ParentRecyclerView.ParentViewHolder>(ParentFieldCallback()) {
 
-    inner class ParentViewHolder(private val binding: NestedLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ParentFieldCallback : DiffUtil.ItemCallback<ParentData>() {
+        override fun areItemsTheSame(oldItem: ParentData, newItem: ParentData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: ParentData, newItem: ParentData): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    fun getDataFromFieldAdapter(): MutableMap<Int, String> {
+        return FieldRecyclerAdapter().getEditTextValues()
+    }
+
+    inner class ParentViewHolder(private val binding: NestedLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(array: ParentData) {
-            val childAdapter = FieldRecyclerAdapter(array.arrays)
+            val childAdapter = FieldRecyclerAdapter()
             binding.nestedRecycler.layoutManager = LinearLayoutManager(binding.root.context)
+            childAdapter.submitList(array.arrays)
             binding.nestedRecycler.adapter = childAdapter
         }
     }
@@ -24,17 +42,8 @@ class ParentRecyclerView: RecyclerView.Adapter<ParentRecyclerView.ParentViewHold
         return ParentViewHolder(NestedLayoutBinding.inflate(inflate, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return parentList.size
-    }
-
     override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
-        val itemModel = parentList[position]
-        holder.bind(itemModel)
-    }
-
-    fun addData(list: List<ParentData>) {
-        parentList = list
-        notifyDataSetChanged() // ეს შესაცვლელი იქნება
+        val field = getItem(position)
+        holder.bind(field)
     }
 }

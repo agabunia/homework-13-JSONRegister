@@ -1,6 +1,7 @@
 package com.example.homework_13_jsonregister.extentions
 
 data class ParentData(
+    val id: Int,
     val arrays: MutableList<FieldData>
 ) {
     data class FieldData(

@@ -36,7 +36,7 @@ class FieldViewModel : ViewModel() {
                     childDataList.add(fieldData)
                 }
 
-                val parentData = ParentData(childDataList)
+                val parentData = ParentData(i, childDataList)
                 data.add(parentData)
             }
         }
@@ -44,5 +44,15 @@ class FieldViewModel : ViewModel() {
         return data
     }
 
+    private val userMap = mutableMapOf<Int, String>()
+    fun getDataFromFragment(map: MutableMap<Int, String>) {
+        userMap += map
+        checkInputs()
+    }
 
+    fun checkInputs() {}
+
+    fun returnData(): MutableMap<Int, String> {
+        return userMap
+    }
 }

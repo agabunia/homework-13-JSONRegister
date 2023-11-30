@@ -8,7 +8,6 @@ import com.example.homework_13_jsonregister.extentions.BaseFragment
 import com.example.homework_13_jsonregister.extentions.FieldViewModel
 import com.example.homework_13_jsonregister.extentions.ParentData
 
-
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
     private val viewModel: FieldViewModel by viewModels()
@@ -19,9 +18,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     fun setAdapter() {
         binding.recycler.layoutManager = LinearLayoutManager(context)
-        val adapter = ParentRecyclerView()
-        binding.recycler.adapter = adapter
-        adapter.addData(setData())
+        val parentAdapter = ParentRecyclerView()
+        binding.recycler.adapter = parentAdapter
+        parentAdapter.submitList(setData())
     }
 
     fun setData(): MutableList<ParentData> {
@@ -29,6 +28,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     }
 
     override fun listeners() {
-        binding.btnRegister.setOnClickListener {}
+        binding.btnRegister.setOnClickListener {
+            val editTextValue = ParentRecyclerView().getDataFromFieldAdapter()
+            viewModel.getDataFromFragment(editTextValue)
+//            d("ViewModelMessage", "${FieldRecyclerAdapter().getEditTextValues()}")
+        }
     }
 }
